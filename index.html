@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="David Grilli – Senior Engineering Consultant. Risk Management (ISO 14971), System Safety &amp; Reliability (MIL-STD-882). Available for contract engagements. St. Paul, MN.">
+  <title>David Grilli | Senior Engineering Consultant</title>
+  <style>
+    :root {
+      --navy:   #0a1628;
+      --slate:  #1c2e4a;
+      --mid:    #2a4166;
+      --rule:   #3a5a8a;
+      --accent: #5b9bd5;
+      --bright: #a8d4f5;
+      --text:   #d0dce8;
+      --dim:    #7a96b0;
+      --white:  #f0f5fa;
+      --green:  #4caf82;
+      --mono:   "Courier New", Courier, monospace;
+      --sans:   Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 14px; }
+
+    body {
+      background-color: var(--navy);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.7;
+    }
+
+    /* TOP BAR */
+    #topbar {
+      background: var(--slate);
+      border-bottom: 2px solid var(--rule);
+      padding: 6px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--dim);
+    }
+    #topbar span.live { color: var(--green); }
+
+    /* HEADER */
+    #header {
+      background: var(--slate);
+      border-bottom: 3px solid var(--accent);
+      padding: 28px 32px 24px;
+    }
+    #header h1 {
+      font-family: var(--mono);
+      font-size: 26px;
+      font-weight: bold;
+      color: var(--white);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    #header h1 span { color: var(--accent); }
+    #header .tagline {
+      margin-top: 8px;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+    #header .tagline em {
+      color: var(--bright);
+      font-style: normal;
+    }
+    #header .tagline .sep { color: var(--rule); margin: 0 6px; }
+    #header .availability {
+      margin-top: 14px;
+      display: inline-block;
+      background: var(--mid);
+      border: 1px solid var(--green);
+      color: var(--green);
+      padding: 3px 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    /* NAV */
+    #nav {
+      background: var(--mid);
+      border-bottom: 2px solid var(--rule);
+      padding: 0 32px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    #nav a {
+      display: inline-block;
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 18px 7px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 1px;
+      border-right: 1px solid var(--rule);
+      transition: background 0.1s, color 0.1s;
+    }
+    #nav a:first-child { border-left: 1px solid var(--rule); }
+    #nav a:hover, #nav a:focus {
+      background: var(--accent);
+      color: var(--navy);
+      outline: none;
+    }
+
+    /* LAYOUT */
+    #wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 28px 16px 52px;
+    }
+
+    /* SECTION */
+    .section { margin-bottom: 36px; }
+    .section h2 {
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent);
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 18px;
+    }
+    .section p {
+      margin-bottom: 10px;
+      font-size: 13.5px;
+      color: var(--text);
+    }
+
+    /* PROFILE GRID */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 210px;
+      gap: 28px;
+      align-items: start;
+    }
+    @media (max-width: 620px) {
+      .profile-grid { grid-template-columns: 1fr; }
+    }
+
+    /* CONTACT CARD */
+    .contact-card {
+      background: var(--slate);
+      border: 1px solid var(--rule);
+      padding: 16px;
+    }
+    .contact-card .label {
+      color: var(--dim);
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 2px;
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .contact-card .label:first-child { margin-top: 0; }
+    .contact-card a {
+      color: var(--bright);
+      text-decoration: none;
+      font-size: 12.5px;
+    }
+    .contact-card a:hover { text-decoration: underline; }
+    .contact-card .value {
+      color: var(--white);
+      font-size: 12.5px;
+    }
+    .contact-card .avail-value {
+      color: var(--green);
+      font-size: 12.5px;
+    }
+
+    /* COMPETENCY TABLE */
+    table.competencies {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      font-family: var(--sans);
+    }
+    table.competencies th {
+      text-align: left;
+      background: var(--mid);
+      color: var(--bright);
+      padding: 7px 10px;
+      border: 1px solid var(--rule);
+      font-family: var(--mono);
+      font-weight: normal;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+    table.competencies td {
+      border: 1px solid var(--rule);
+      padding: 8px 10px;
+      vertical-align: top;
+      color: var(--text);
+    }
+    table.competencies tr:hover td { background: var(--slate); }
+    td.area {
+      color: var(--white);
+      white-space: nowrap;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    /* EXPERIENCE */
+    .exp-entry {
+      border-left: 2px solid var(--rule);
+      padding: 0 0 24px 18px;
+      position: relative;
+    }
+    .exp-entry:last-child { padding-bottom: 0; }
+    .exp-entry::before {
+      content: "■";
+      position: absolute;
+      left: -8px;
+      top: 3px;
+      color: var(--accent);
+      font-size: 10px;
+      background: var(--navy);
+      padding: 2px 0;
+    }
+    .exp-entry .role {
+      color: var(--white);
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .exp-entry .org {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+    .exp-entry .period {
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 11px;
+      margin-bottom: 8px;
+      margin-top: 2px;
+    }
+    .exp-entry p {
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .exp-entry ul {
+      margin: 2px 0 0 18px;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .exp-entry ul li { margin-bottom: 4px; }
+
+    /* STANDARDS */
+    .standards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 8px;
+    }
+    .std-tag {
+      background: var(--mid);
+      border: 1px solid var(--rule);
+      color: var(--bright);
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 3px 9px;
+    }
+
+    /* ENGAGEMENT TERMS */
+    .terms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 580px) {
+      .terms-grid { grid-template-columns: 1fr; }
+    }
+    .term-box {
+      background: var(--slate);
+      border: 1px solid var(--rule);
+      padding: 14px 16px;
+    }
+    .term-box .term-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dim);
+      margin-bottom: 4px;
+    }
+    .term-box .term-value {
+      color: var(--white);
+      font-size: 13px;
+    }
+    .term-box .term-sub {
+      color: var(--dim);
+      font-size: 11.5px;
+      margin-top: 2px;
+    }
+
+    /* CTA */
+    .cta-box {
+      background: var(--slate);
+      border: 2px solid var(--accent);
+      padding: 22px 26px;
+    }
+    .cta-box p {
+      font-size: 13.5px;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    .cta-box a.btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--navy);
+      text-decoration: none;
+      padding: 9px 22px;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-right: 10px;
+      transition: background 0.1s;
+    }
+    .cta-box a.btn:hover { background: var(--bright); }
+    .cta-box a.btn.secondary {
+      background: var(--mid);
+      color: var(--bright);
+      border: 1px solid var(--accent);
+    }
+    .cta-box a.btn.secondary:hover { background: var(--slate); }
+
+    /* VENTURE NOTE */
+    .venture-note {
+      background: var(--slate);
+      border-left: 3px solid var(--accent);
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--dim);
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+    .venture-note a { color: var(--accent); text-decoration: none; }
+    .venture-note a:hover { text-decoration: underline; }
+
+    /* EDUCATION */
+    .edu-entry { margin-bottom: 14px; }
+    .edu-entry .degree { color: var(--white); font-size: 14px; font-weight: bold; }
+    .edu-entry .school { color: var(--accent); font-family: var(--mono); font-size: 12px; margin-top: 2px; }
+    .edu-entry .period { color: var(--dim); font-family: var(--mono); font-size: 11px; margin-bottom: 6px; margin-top: 2px; }
+    .edu-entry p { font-size: 13px; color: var(--text); }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 28px 0;
+    }
+
+    /* FOOTER */
+    #footer {
+      background: var(--slate);
+      border-top: 2px solid var(--rule);
+      padding: 14px 32px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--dim);
+      text-align: center;
+    }
+    #footer a { color: var(--dim); text-decoration: none; }
+    #footer a:hover { color: var(--bright); }
+  </style>
+</head>
+<body>
+
+<div id="topbar">
+  <span>www.davidgrilli.net</span>
+  <span><span class="live">●</span>&nbsp; AVAILABLE FOR CONTRACT ENGAGEMENTS — 2026</span>
+</div>
+
+<div id="header">
+  <h1>David <span>Grilli</span></h1>
+  <div class="tagline">
+    <em>Senior Engineering Consultant</em>
+    <span class="sep">|</span>
+    Risk Management &amp; Regulated Systems · ISO 14971
+    <span class="sep">|</span>
+    System Safety &amp; Reliability · MIL-STD-882
+    <span class="sep">|</span>
+    St. Paul, MN
+  </div>
+  <div class="availability">[ ACCEPTING CONTRACTS — REMOTE, HYBRID, OR ON-SITE ]</div>
+</div>
+
+<nav id="nav">
+  <a href="#about">About</a>
+  <a href="#competencies">Competencies</a>
+  <a href="#experience">Experience</a>
+  <a href="#standards">Standards</a>
+  <a href="#education">Education</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<div id="wrap">
+
+  <!-- ABOUT -->
+  <div class="section" id="about">
+    <h2>// About</h2>
+    <div class="profile-grid">
+      <div>
+        <p>
+          I'm an independent engineering consultant based in St. Paul, MN, with over a decade of experience in regulated and safety-critical systems — primarily <strong style="color:var(--white)">medical device risk management</strong> and <strong style="color:var(--white)">aerospace system safety and reliability engineering</strong>.
+        </p>
+        <p>
+          Most recently I spent over three years at Abbott leading risk management for electrophysiology product development: RF ablation, pulsed field ablation, and cardiac imaging technologies. Before that, I was a reliability and system safety engineer at Honeywell Aerospace on commercial and defense programs, applying MIL-STD-882E, FTA, FMECA, and safety-critical function thread analysis across multiple platforms — and serving as Control Account Manager for program budgets and schedules.
+        </p>
+        <p>
+          I work well with teams that need experienced execution without added overhead: someone who can step in, get up to speed quickly, and deliver auditable, defensible work. <strong style="color:var(--white);text-decoration:underline;">Engagements are typically 20–40 hrs/week, 6–12 months, remote or hybrid.</strong>
+        </p>
+        <div class="venture-note">
+          <strong>Note:</strong> I am a co-founder of <a href="http://www.northstarhaptics.com" target="_blank">North Star Haptics</a>, a hardware venture focused on tactile technology and human-interface design. That work is pre-revenue; my consulting practice operates wholly independently.
+        </div>
+      </div>
+
+      <div class="contact-card" id="contact">
+        <span class="label">Name</span>
+        <span class="value">David Grilli</span>
+
+        <span class="label">Location</span>
+        <span class="value">St. Paul, MN, USA</span>
+
+        <span class="label">Email</span>
+        <a href="/cdn-cgi/l/email-protection#543035223d30143035223d3033263d38383d7a3a3120"><span class="__cf_email__" data-cfemail="b6d2d7c0dfd2f6d2d7c0dfd2d1c4dfdadadf98d8d3c2">[email&#160;protected]</span></a>
+
+        <span class="label">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/davidgrilli" target="_blank">linkedin.com/in/davidgrilli</a>
+
+        <span class="label">Availability</span>
+        <span class="avail-value">Open — Contract Only</span>
+
+        <span class="label">Work Locations</span>
+        <span class="value">Remote · Hybrid · On-site</span>
+
+        <span class="label">Engagement Length</span>
+        <span class="value">6–12 months typical</span>
+
+        <span class="label">Hours / Week</span>
+        <span class="value">20–40 hrs, flexible</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- COMPETENCIES -->
+  <div class="section" id="competencies">
+    <h2>// Core Competencies</h2>
+    <table class="competencies">
+      <tr>
+        <th>Domain</th>
+        <th>Competency</th>
+        <th>Detail</th>
+      </tr>
+      <tr>
+        <td class="area">Medical Devices</td>
+        <td>Risk Management</td>
+        <td>ISO 14971-compliant risk files from scratch; hazard identification, risk evaluation, mitigation strategy, residual risk, and benefit-risk analysis for FDA and EU MDR submissions</td>
+      </tr>
+      <tr>
+        <td class="area">Medical Devices</td>
+        <td>Design Controls &amp; V&amp;V</td>
+        <td>DHF support, traceability matrix development, verification and validation planning and execution, design review facilitation</td>
+      </tr>
+      <tr>
+        <td class="area">Medical Devices</td>
+        <td>Regulatory Readiness</td>
+        <td>Risk management artifacts required for 510(k) and PMA submissions — risk management reports, benefit-risk analyses, and supporting documentation. Standards gap analysis and audit preparation from a risk management perspective; not a regulatory submissions specialist.</td>
+      </tr>
+      <tr>
+        <td class="area">Aerospace</td>
+        <td>System Safety</td>
+        <td>MIL-STD-882E safety analyses; FHA, PSSA, SSA per ARP4761; Fault Tree Analysis; FMECA; Safety Critical Function Thread Analysis; human factors per MIL-STD-1472G and ANSI Z535</td>
+      </tr>
+      <tr>
+        <td class="area">Aerospace</td>
+        <td>Reliability Engineering</td>
+        <td>Reliability predictions per MIL-HDBK-217F Notice 2 and VITA 51.1; reliability program management; design for reliability reviews</td>
+      </tr>
+      <tr>
+        <td class="area">Aerospace</td>
+        <td>Program Support</td>
+        <td>Control Account Manager (CAM) experience; EVMS-certified; resource, schedule, and budget management; contract proposals</td>
+      </tr>
+      <tr>
+        <td class="area">Both</td>
+        <td>Failure Analysis</td>
+        <td>FMEA, FMECA, FTA, HAZOP across hardware and software systems; cross-functional design review facilitation and documentation</td>
+      </tr>
+      <tr>
+        <td class="area">Both</td>
+        <td>Technical Documentation</td>
+        <td>Risk management and system safety documentation for regulatory packages — risk management reports, hazard analyses, safety assessments, and supporting records; clear, traceable, and defensible. Audit readiness and corrective action planning within the risk and safety domain.</td>
+      </tr>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ENGAGEMENT TERMS -->
+  <div class="section">
+    <h2>// Typical Engagement Profile</h2>
+    <div class="terms-grid">
+      <div class="term-box">
+        <div class="term-label">Duration</div>
+        <div class="term-value">6–12 months</div>
+        <div class="term-sub">Shorter engagements considered</div>
+      </div>
+      <div class="term-box">
+        <div class="term-label">Availability</div>
+        <div class="term-value">20–40 hrs/week</div>
+        <div class="term-sub">Flexible to program cadence</div>
+      </div>
+      <div class="term-box">
+        <div class="term-label">Work Location</div>
+        <div class="term-value">Remote, Hybrid, On-site</div>
+        <div class="term-sub">Based in St. Paul, MN</div>
+      </div>
+      <div class="term-box">
+        <div class="term-label">Industries</div>
+        <div class="term-value">Medical Devices</div>
+        <div class="term-sub">Aerospace &amp; Defense</div>
+      </div>
+      <div class="term-box">
+        <div class="term-label">Rate</div>
+        <div class="term-value">On request</div>
+        <div class="term-sub">Commensurate with scope</div>
+      </div>
+      <div class="term-box">
+        <div class="term-label">Contact</div>
+        <div class="term-value"><a href="/cdn-cgi/l/email-protection#d6b2b7a0bfb296b2b7a0bfb2b1a4bfbababff8b8b3a2" style="color:var(--bright);text-decoration:none;font-size:13px;"><span class="__cf_email__" data-cfemail="debabfa8b7ba9ebabfa8b7bab9acb7b2b2b7f0b0bbaa">[email&#160;protected]</span></a></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- EXPERIENCE -->
+  <div class="section" id="experience">
+    <h2>// Experience</h2>
+
+    <div class="exp-entry">
+      <div class="role">Senior Engineering Consultant (Contract / Interim)</div>
+      <div class="org">Self-Employed · Independent Consultant</div>
+      <div class="period">Oct 2025 – Present &nbsp;·&nbsp; St. Paul, MN (Hybrid / Remote)</div>
+      <p>Contract and interim engineering support to teams building regulated, safety-critical, or operationally complex systems.</p>
+      <ul>
+        <li>Risk management and hazard analysis per ISO 14971</li>
+        <li>System safety and reliability engineering per MIL-STD-882 and MIL-HDBK-217 w/ VITA 51.1</li>
+        <li>Design reviews, failure mode analysis, and technical safety justification</li>
+        <li>Audit readiness and remediation of incomplete or fragile documentation</li>
+        <li>Interim support for teams needing experienced execution without added headcount</li>
+      </ul>
+    </div>
+
+    <div class="exp-entry">
+      <div class="role">Senior Risk Management Engineer</div>
+      <div class="org">Abbott · Full-time</div>
+      <div class="period">Aug 2022 – Sep 2025 &nbsp;·&nbsp; 3 yrs 2 mos &nbsp;·&nbsp; St. Paul, MN</div>
+      <p>Risk management for electrophysiology product development — RF ablation, pulsed field ablation, and cardiac imaging technologies.</p>
+      <ul>
+        <li>Led and supported risk management for regulated products: hazard analysis, risk evaluation, and mitigation aligned with ISO 14971</li>
+        <li>Contributed to system-level design reviews and safety justifications across cross-functional engineering teams</li>
+        <li>Strengthened documentation quality and traceability to support regulatory and audit readiness</li>
+        <li>Partnered with quality and design teams to reduce rework and clarify technical decision-making</li>
+      </ul>
+    </div>
+
+    <div class="exp-entry">
+      <div class="role">Advanced Hardware Engineer</div>
+      <div class="org">Honeywell Aerospace · Full-time</div>
+      <div class="period">Jan 2019 – Aug 2022 &nbsp;·&nbsp; 3 yrs 8 mos &nbsp;·&nbsp; Minneapolis, MN</div>
+      <p>Reliability and system safety engineer and Control Account Manager (CAM) for commercial and defense aerospace programs.</p>
+      <ul>
+        <li>Reliability predictions per MIL-HDBK-217F Notice 2 and VITA 51.1; system safety per MIL-STD-882E</li>
+        <li>FMECA, Fault Tree Analysis, Safety Critical Function Thread Analysis, and human factors per MIL-STD-1472G / ANSI Z535</li>
+        <li>CAM responsibilities: resource, schedule, and budget management; contract proposals and bidding</li>
+        <li>Recognized with Honeywell Bronze Bravo Award (Apr 2022) and Outstanding Engineer Award (Feb 2021)</li>
+        <li>EVMS-certified; Design for Six Sigma (DFSS) trained</li>
+      </ul>
+    </div>
+
+    <div class="exp-entry">
+      <div class="role">Product Support Engineer II</div>
+      <div class="org">ACIST Medical Systems · Full-time</div>
+      <div class="period">Mar 2017 – Jan 2019 &nbsp;·&nbsp; 1 yr 11 mos &nbsp;·&nbsp; Eden Prairie, MN</div>
+      <p>Escalated engineering support to customer support, field service, affiliates, and distributors for diagnostic imaging injectors and FFR/IVUS product lines. Planned and implemented service and support initiatives for product launches and lifecycle management. Delivered technical service training to service centers, affiliates, distributors, and biomedical technicians. Developed and maintained service kits, tools, test fixtures, and diagnostics for the repair of new and existing products.</p>
+    </div>
+
+    <div class="exp-entry">
+      <div class="role">Senior Technical Support Engineer</div>
+      <div class="org">Data Sciences International · Full-time</div>
+      <div class="period">Mar 2011 – Mar 2017 &nbsp;·&nbsp; 6 yrs 1 mo &nbsp;·&nbsp; New Brighton, MN</div>
+      <p>Technical support and failure analysis for implantable telemetry medical devices. Managed support for key accounts and an international distributor; represented the support department on a cross-functional product portfolio team as the voice of the customer.</p>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+
+  <!-- STANDARDS -->
+  <div class="section" id="standards">
+    <h2>// Standards &amp; Frameworks</h2>
+    <p>Hands-on application across real programs and regulatory submissions:</p>
+    <div class="standards">
+      <span class="std-tag">ISO 14971</span>
+      <span class="std-tag">IEC 62304</span>
+      <span class="std-tag">IEC 60601-1</span>
+      <span class="std-tag">21 CFR Part 820</span>
+      <span class="std-tag">EU MDR 2017/745</span>
+      <span class="std-tag">MIL-STD-882E</span>
+      <span class="std-tag">MIL-HDBK-217F</span>
+      <span class="std-tag">VITA 51.1</span>
+      <span class="std-tag">ARP4761</span>
+      <span class="std-tag">ARP4754A</span>
+      <span class="std-tag">DO-178C</span>
+      <span class="std-tag">DO-254</span>
+      <span class="std-tag">MIL-STD-1472G</span>
+      <span class="std-tag">ANSI Z535</span>
+      <span class="std-tag">FTA</span>
+      <span class="std-tag">FMEA / FMECA</span>
+      <span class="std-tag">HAZOP</span>
+      <span class="std-tag">510(k)</span>
+      <span class="std-tag">PMA</span>
+      <span class="std-tag">EVMS</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- EDUCATION -->
+  <div class="section" id="education">
+    <h2>// Education</h2>
+    <div class="edu-entry">
+      <div class="degree">Bachelor of Science, Electrical Engineering</div>
+      <div class="school">University of Minnesota – Twin Cities</div>
+      <div class="period">2004 – 2008</div>
+      <p>Coursework spanning digital design, analog and digital electronics, RF, semiconductors, transmission lines, and microcontrollers. Member of the Electrical Team, University of Minnesota Solar Vehicle Project.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- CTA / HIRE -->
+  <div class="section">
+    <h2>// Hire Me</h2>
+    <div class="cta-box">
+      <p>
+        I take on a small number of contracts at a time, so every engagement gets real, senior-level attention — not a handoff to junior staff.
+        If your team needs a risk file built, a regulatory submission supported, a safety program stood up, or an experienced hand for a critical milestone, reach out directly.
+        I respond promptly and we can establish fit in a single call.
+      </p>
+      <a class="btn" href="/cdn-cgi/l/email-protection#660207100f02260207100f0201140f0a0a0f48080312591513040c0305125b25090812140705124354562f0817130f141f435456100f074354560207100f0201140f0a0a0f48080312">Send an Inquiry</a>
+      <a class="btn secondary" hre
