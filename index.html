@@ -54,11 +54,11 @@
       flex-wrap: wrap;
       gap: 4px;
     }
-    #topbar .avail { color: #f0a830; letter-spacing: 1px; }
+    #topbar .avail { color: #4caf50; letter-spacing: 1px; }
     #topbar .dot {
       display: inline-block;
       width: 6px; height: 6px;
-      background: #f0a830;
+      background: #4caf50;
       border-radius: 50%;
       margin-right: 6px;
       vertical-align: middle;
@@ -123,7 +123,7 @@
       font-size: clamp(10px, 1.5vw, 11px);
       letter-spacing: 0.5px;
     }
-    .header-tag.highlight { border-color: var(--teal); color: #f0a830; }
+    .header-tag.highlight { border-color: #4caf50; color: #4caf50; }
 
     /* ── NAV ── */
     #nav {
@@ -152,6 +152,18 @@
       white-space: nowrap;
     }
     #nav a:hover { color: var(--navy); border-bottom-color: var(--teal); }
+
+    @media (max-width: 620px) {
+      #nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
+      }
+      #nav a {
+        white-space: nowrap;
+        padding: 10px 14px 8px;
+      }
+    }
 
     /* ── LAYOUT ── */
     #wrap {
