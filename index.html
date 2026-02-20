@@ -23,7 +23,6 @@
       --dim:      #8a8278;
       --white:    #ffffff;
       --green:    #2a6e2a;
-      --red:      #c0392b;
       --display:  'Oswald', 'Arial Narrow', sans-serif;
       --sans:     'Barlow', Georgia, sans-serif;
       --mono:     'DM Mono', 'Courier New', monospace;
@@ -38,29 +37,28 @@
       font-family: var(--sans);
       font-weight: 400;
       line-height: 1.7;
+      overflow-x: hidden;
     }
 
     /* ── TOPBAR ── */
     #topbar {
       background: var(--navy);
-      padding: 7px 40px;
+      padding: 7px clamp(16px, 4vw, 40px);
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: clamp(10px, 1.5vw, 11px);
       color: rgba(255,255,255,0.45);
       letter-spacing: 0.5px;
+      flex-wrap: wrap;
+      gap: 4px;
     }
-    #topbar .avail {
-      color: #4cdb8a;
-      letter-spacing: 1px;
-    }
+    #topbar .avail { color: #4caf50; letter-spacing: 1px; }
     #topbar .dot {
       display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: #4cdb8a;
+      width: 6px; height: 6px;
+      background: #4caf50;
       border-radius: 50%;
       margin-right: 6px;
       vertical-align: middle;
@@ -74,20 +72,17 @@
     /* ── HEADER ── */
     #header {
       background: var(--navy);
-      padding: 52px 40px 44px;
+      padding: clamp(28px, 5vw, 52px) clamp(16px, 4vw, 40px) clamp(24px, 4vw, 44px);
       position: relative;
       overflow: hidden;
     }
     #header::after {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 0; left: 0; right: 0;
       height: 3px;
       background: linear-gradient(90deg, var(--teal) 0%, #d4890a 50%, transparent 100%);
     }
-    /* Cross marks */
     #header::before {
       content: '';
       position: absolute;
@@ -103,7 +98,7 @@
     .header-inner { position: relative; z-index: 1; max-width: 900px; }
     #header .eyebrow {
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: clamp(10px, 1.5vw, 11px);
       color: var(--teal);
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -111,73 +106,74 @@
     }
     #header h1 {
       font-family: var(--display);
-      font-size: 54px;
+      font-size: clamp(32px, 7vw, 54px);
       font-weight: 600;
       color: #ffffff;
       letter-spacing: 1px;
       line-height: 1;
       margin-bottom: 16px;
     }
-    #header h1 span {
-      color: rgba(255,255,255,0.35);
-      font-weight: 300;
-    }
-    .header-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 20px;
-    }
+    #header h1 span { color: rgba(255,255,255,0.35); font-weight: 300; }
+    .header-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
     .header-tag {
       border: 1px solid rgba(255,255,255,0.15);
       color: rgba(255,255,255,0.65);
       padding: 4px 12px;
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: clamp(10px, 1.5vw, 11px);
       letter-spacing: 0.5px;
     }
-    .header-tag.highlight {
-      border-color: var(--teal);
-      color: #f0a830;
-    }
+    .header-tag.highlight { border-color: #4caf50; color: #4caf50; }
 
     /* ── NAV ── */
     #nav {
       background: var(--white);
       border-bottom: 1px solid var(--border);
-      padding: 0 40px;
+      padding: 0 clamp(16px, 4vw, 40px);
       display: flex;
       position: sticky;
       top: 0;
       z-index: 100;
       box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
     #nav a {
       display: inline-block;
       color: var(--mid);
       text-decoration: none;
-      padding: 14px 20px 12px;
+      padding: 14px clamp(10px, 2vw, 20px) 12px;
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: clamp(10px, 1.5vw, 11px);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       border-bottom: 2px solid transparent;
       transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
     }
-    #nav a:hover {
-      color: var(--navy);
-      border-bottom-color: var(--teal);
+    #nav a:hover { color: var(--navy); border-bottom-color: var(--teal); }
+
+    @media (max-width: 620px) {
+      #nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
+      }
+      #nav a {
+        white-space: nowrap;
+        padding: 10px 14px 8px;
+      }
     }
 
     /* ── LAYOUT ── */
     #wrap {
       max-width: 960px;
       margin: 0 auto;
-      padding: 56px 40px 80px;
+      padding: clamp(24px, 5vw, 56px) clamp(16px, 4vw, 40px) clamp(48px, 7vw, 80px);
     }
 
     /* ── SECTION ── */
-    .section { margin-bottom: 64px; }
+    .section { margin-bottom: clamp(40px, 6vw, 64px); }
     .section-header {
       display: flex;
       align-items: baseline;
@@ -188,39 +184,29 @@
     }
     .section-header h2 {
       font-family: var(--display);
-      font-size: 22px;
+      font-size: clamp(17px, 3vw, 22px);
       font-weight: 600;
       color: var(--navy);
       letter-spacing: 0.5px;
       text-transform: uppercase;
     }
-    .section-header .section-num {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--dim);
-      letter-spacing: 1px;
-    }
     .section p {
-      font-size: 15px;
+      font-size: clamp(13.5px, 2vw, 15px);
       color: var(--mid);
       margin-bottom: 14px;
-      max-width: 680px;
+      max-width: min(680px, 100%);
     }
     .section p strong { color: var(--text); font-weight: 600; }
 
     /* ── PROFILE GRID ── */
     .profile-grid {
       display: grid;
-      grid-template-columns: 1fr 240px;
-      gap: 40px;
+      grid-template-columns: 1fr min(240px, 35%);
+      gap: clamp(20px, 4vw, 40px);
       align-items: start;
     }
-    @media (max-width: 680px) {
+    @media (max-width: 620px) {
       .profile-grid { grid-template-columns: 1fr; }
-      #wrap { padding: 32px 20px 60px; }
-      #header { padding: 36px 20px 32px; }
-      #nav { padding: 0 20px; }
-      #topbar { padding: 7px 20px; }
     }
 
     /* ── CONTACT CARD ── */
@@ -229,22 +215,20 @@
       border: 1px solid var(--border);
       padding: 0;
       overflow: hidden;
+      width: 100%;
     }
     .contact-card-header {
       background: var(--navy);
-      padding: 12px 18px;
+      padding: 11px clamp(14px, 3vw, 18px);
       font-family: var(--display);
-      font-size: 13px;
+      font-size: clamp(12px, 2vw, 13px);
       font-weight: 600;
       color: rgba(255,255,255,0.7);
       letter-spacing: 2px;
       text-transform: uppercase;
     }
-    .contact-card-body { padding: 16px 18px; }
-    .contact-row {
-      padding: 8px 0;
-      border-bottom: 1px solid var(--bg);
-    }
+    .contact-card-body { padding: clamp(12px, 2vw, 16px) clamp(14px, 3vw, 18px); }
+    .contact-row { padding: 7px 0; border-bottom: 1px solid var(--bg); }
     .contact-row:last-child { border-bottom: none; }
     .contact-label {
       font-family: var(--mono);
@@ -255,30 +239,28 @@
       margin-bottom: 2px;
     }
     .contact-value {
-      font-size: 13px;
+      font-size: clamp(12px, 2vw, 13px);
       color: var(--text);
       font-weight: 500;
+      word-break: break-word;
     }
     .contact-value a {
       color: var(--teal);
       text-decoration: none;
-      font-size: 13px;
+      word-break: break-word;
     }
     .contact-value a:hover { text-decoration: underline; }
-    .contact-value.avail {
-      color: var(--green);
-      font-weight: 600;
-    }
+    .contact-value.avail { color: var(--green); font-weight: 600; }
 
     /* ── VENTURE NOTE ── */
     .venture-note {
       border-left: 3px solid var(--border);
       padding: 10px 16px;
-      font-size: 13.5px;
+      font-size: clamp(13px, 2vw, 13.5px);
       color: var(--dim);
       margin-top: 20px;
       line-height: 1.6;
-      max-width: 640px;
+      max-width: min(640px, 100%);
     }
     .venture-note a { color: var(--teal); text-decoration: none; }
     .venture-note a:hover { text-decoration: underline; }
@@ -286,34 +268,36 @@
     /* ── COMPETENCY TABLE ── */
     .table-wrap {
       border: 1px solid var(--border);
-      overflow: hidden;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       background: var(--white);
+      width: 100%;
     }
     table.competencies {
       width: 100%;
+      min-width: 500px;
       border-collapse: collapse;
-      font-size: 14px;
+      font-size: clamp(13px, 1.8vw, 14px);
       font-family: var(--sans);
     }
-    table.competencies thead tr {
-      background: var(--navy);
-    }
+    table.competencies thead tr { background: var(--navy); }
     table.competencies th {
       text-align: left;
       color: rgba(255,255,255,0.6);
-      padding: 10px 16px;
+      padding: 10px clamp(10px, 2vw, 16px);
       font-family: var(--mono);
       font-weight: 500;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       font-size: 10px;
+      white-space: nowrap;
     }
     table.competencies td {
       border-bottom: 1px solid var(--border);
-      padding: 12px 16px;
+      padding: clamp(10px, 1.5vw, 12px) clamp(10px, 2vw, 16px);
       vertical-align: top;
       color: var(--mid);
-      font-size: 13.5px;
+      font-size: clamp(13px, 1.8vw, 13.5px);
       line-height: 1.6;
     }
     table.competencies tbody tr:last-child td { border-bottom: none; }
@@ -322,32 +306,42 @@
       color: var(--navy);
       white-space: nowrap;
       font-family: var(--mono);
-      font-size: 12px;
+      font-size: clamp(11px, 1.5vw, 12px);
       font-weight: 500;
-      letter-spacing: 0.5px;
     }
-    td.competency-name {
-      color: var(--text);
-      font-weight: 500;
-      white-space: nowrap;
+    td.competency-name { color: var(--text); font-weight: 500; white-space: nowrap; }
+
+    /* Mobile: table becomes stacked cards */
+    @media (max-width: 680px) {
+      .table-wrap { border: none; background: transparent; overflow: visible; }
+      table.competencies { min-width: 0; }
+      table.competencies thead { display: none; }
+      table.competencies,
+      table.competencies tbody,
+      table.competencies tr,
+      table.competencies td { display: block; width: 100%; box-sizing: border-box; }
+      table.competencies tr {
+        background: var(--white);
+        border: 1px solid var(--border);
+        margin-bottom: 10px;
+        padding: 14px 16px;
+      }
+      table.competencies td { border: none; border-bottom: 1px solid var(--bg); padding: 4px 0; white-space: normal; }
+      table.competencies td:last-child { border-bottom: none; }
+      td.area { font-size: 10px; color: var(--teal); letter-spacing: 1px; text-transform: uppercase; }
+      td.competency-name { font-size: 15px; font-weight: 600; color: var(--navy); padding-bottom: 6px; }
     }
 
     /* ── TERMS GRID ── */
     .terms-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 1px;
       background: var(--border);
       border: 1px solid var(--border);
       overflow: hidden;
     }
-    @media (max-width: 580px) {
-      .terms-grid { grid-template-columns: 1fr; }
-    }
-    .term-box {
-      background: var(--white);
-      padding: 20px 22px;
-    }
+    .term-box { background: var(--white); padding: clamp(14px, 2vw, 20px) clamp(14px, 2vw, 22px); }
     .term-label {
       font-family: var(--mono);
       font-size: 10px;
@@ -358,100 +352,73 @@
     }
     .term-value {
       color: var(--navy);
-      font-size: 14px;
+      font-size: clamp(13px, 2vw, 14px);
       font-weight: 600;
       font-family: var(--display);
-      letter-spacing: 0.3px;
     }
-    .term-sub {
-      color: var(--dim);
-      font-size: 12px;
-      margin-top: 3px;
-    }
+    .term-sub { color: var(--dim); font-size: clamp(11px, 1.5vw, 12px); margin-top: 3px; }
 
     /* ── EXPERIENCE ── */
     .exp-entry {
       display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 32px;
-      padding: 28px 0;
+      grid-template-columns: min(200px, 26%) 1fr;
+      gap: clamp(16px, 3vw, 32px);
+      padding: clamp(16px, 3vw, 28px) 0;
       border-bottom: 1px solid var(--border);
     }
     .exp-entry:last-child { border-bottom: none; }
-    @media (max-width: 680px) {
-      .exp-entry { grid-template-columns: 1fr; gap: 8px; }
+    @media (max-width: 620px) {
+      .exp-entry { grid-template-columns: 1fr; gap: 4px; }
+      .exp-meta { display: flex; gap: 16px; flex-wrap: wrap; }
     }
-    .exp-meta { }
     .exp-period {
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: clamp(10px, 1.5vw, 11px);
       color: var(--dim);
-      letter-spacing: 0.5px;
       line-height: 1.6;
       margin-bottom: 6px;
     }
-    .exp-location {
-      font-size: 12px;
-      color: var(--dim);
-    }
+    .exp-location { font-size: clamp(11px, 1.5vw, 12px); color: var(--dim); }
     .exp-body .role {
       font-family: var(--display);
-      font-size: 18px;
+      font-size: clamp(16px, 2.5vw, 18px);
       font-weight: 600;
       color: var(--navy);
-      letter-spacing: 0.3px;
       margin-bottom: 3px;
     }
     .exp-body .org {
-      font-size: 13px;
+      font-size: clamp(12px, 1.8vw, 13px);
       color: var(--teal);
       font-weight: 500;
       margin-bottom: 10px;
       font-family: var(--mono);
-      letter-spacing: 0.5px;
     }
     .exp-body p {
-      font-size: 13.5px;
+      font-size: clamp(13px, 1.8vw, 13.5px);
       color: var(--mid);
       margin-bottom: 10px;
-      max-width: 600px;
+      max-width: min(600px, 100%);
     }
-    .exp-body ul {
-      margin: 6px 0 0 16px;
-    }
-    .exp-body ul li {
-      font-size: 13.5px;
-      color: var(--mid);
-      margin-bottom: 5px;
-      line-height: 1.6;
-    }
+    .exp-body ul { margin: 6px 0 0 16px; }
+    .exp-body ul li { font-size: clamp(13px, 1.8vw, 13.5px); color: var(--mid); margin-bottom: 5px; line-height: 1.6; }
 
     /* ── STANDARDS ── */
-    .standards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
+    .standards { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
     .std-tag {
       background: var(--white);
       border: 1px solid var(--border);
       color: var(--navy-mid);
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: clamp(10px, 1.5vw, 11px);
       padding: 5px 12px;
-      letter-spacing: 0.5px;
       transition: border-color 0.15s, background 0.15s;
     }
-    .std-tag:hover {
-      border-color: var(--teal);
-      background: var(--bg);
-    }
+    .std-tag:hover { border-color: var(--teal); background: var(--bg); }
 
     /* ── CTA ── */
     .cta-box {
       background: var(--navy);
-      padding: 40px 44px;
+      padding: clamp(24px, 4vw, 40px) clamp(20px, 4vw, 44px);
       position: relative;
       overflow: hidden;
     }
@@ -463,93 +430,65 @@
       background: linear-gradient(90deg, var(--teal), transparent);
     }
     .cta-box p {
-      font-size: 15px;
+      font-size: clamp(13.5px, 2vw, 15px);
       color: rgba(255,255,255,0.7);
       margin-bottom: 24px;
-      max-width: 580px;
+      max-width: min(580px, 100%);
       line-height: 1.8;
     }
     .cta-box a.btn {
       display: inline-block;
       text-decoration: none;
-      padding: 12px 28px;
+      padding: 12px clamp(16px, 3vw, 28px);
       font-family: var(--display);
-      font-size: 13px;
+      font-size: clamp(12px, 1.8vw, 13px);
       font-weight: 600;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-right: 12px;
+      margin-right: 10px;
+      margin-bottom: 8px;
       transition: all 0.15s;
     }
-    .cta-box a.btn.primary {
-      background: var(--teal);
-      color: #ffffff;
-    }
+    .cta-box a.btn.primary { background: var(--teal); color: #ffffff; }
     .cta-box a.btn.primary:hover { background: #d4890a; }
     .cta-box a.btn.secondary {
       background: transparent;
       color: rgba(255,255,255,0.7);
       border: 1px solid rgba(255,255,255,0.25);
     }
-    .cta-box a.btn.secondary:hover {
-      border-color: rgba(255,255,255,0.5);
-      color: #ffffff;
-    }
+    .cta-box a.btn.secondary:hover { border-color: rgba(255,255,255,0.5); color: #ffffff; }
 
-    /* ── EDU ── */
+    /* ── EDUCATION ── */
     .edu-entry {
       background: var(--white);
       border: 1px solid var(--border);
-      padding: 22px 26px;
+      padding: clamp(16px, 3vw, 22px) clamp(16px, 3vw, 26px);
     }
-    .edu-entry .degree {
-      font-family: var(--display);
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 4px;
-    }
-    .edu-entry .school {
-      color: var(--teal);
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
-    }
-    .edu-entry .period {
-      color: var(--dim);
-      font-family: var(--mono);
-      font-size: 11px;
-      margin-bottom: 10px;
-    }
-    .edu-entry p { font-size: 13.5px; color: var(--mid); }
+    .edu-entry .degree { font-family: var(--display); font-size: clamp(16px, 2.5vw, 18px); font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .edu-entry .school { color: var(--teal); font-family: var(--mono); font-size: clamp(11px, 1.5vw, 12px); margin-bottom: 4px; }
+    .edu-entry .period { color: var(--dim); font-family: var(--mono); font-size: 11px; margin-bottom: 10px; }
+    .edu-entry p { font-size: clamp(13px, 1.8vw, 13.5px); color: var(--mid); }
 
-    hr.divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0 0 64px;
-    }
+    hr.divider { border: none; border-top: 1px solid var(--border); margin: 0 0 clamp(40px, 6vw, 64px); }
 
     /* ── FOOTER ── */
     #footer {
       background: var(--navy);
-      padding: 20px 40px;
+      padding: clamp(14px, 2vw, 20px) clamp(16px, 4vw, 40px);
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: clamp(10px, 1.5vw, 11px);
       color: rgba(255,255,255,0.3);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 8px;
-      letter-spacing: 0.5px;
+      gap: 6px;
     }
     #footer a { color: rgba(255,255,255,0.3); text-decoration: none; }
     #footer a:hover { color: rgba(255,255,255,0.6); }
   </style>
 </head>
 <body>
-
 <div id="topbar">
   <span>davidgrilli.net</span>
   <span class="avail"><span class="dot"></span>Available for Contract Engagements — 2026</span>
@@ -611,7 +550,7 @@
           </div>
           <div class="contact-row">
             <div class="contact-label">Email</div>
-            <div class="contact-value"><a href="mailto:david@davidgrilli.net">david@davidgrilli.net</a></div>
+            <div class="contact-value"><a href="/cdn-cgi/l/email-protection#b0d4d1c6d9d4f0d4d1c6d9d4d7c2d9dcdcd99eded5c4"><span class="__cf_email__" data-cfemail="375356415e53775356415e5350455e5b5b5e19595243">[email&#160;protected]</span></a></div>
           </div>
           <div class="contact-row">
             <div class="contact-label">LinkedIn</div>
@@ -734,7 +673,7 @@
       <div class="term-box">
         <div class="term-label">Contact</div>
         <div class="term-value" style="font-size:13px;font-family:var(--mono);font-weight:400;">
-          <a href="mailto:david@davidgrilli.net" style="color:var(--teal);text-decoration:none;">david@davidgrilli.net</a>
+          <a href="/cdn-cgi/l/email-protection#b9ddd8cfd0ddf9ddd8cfd0dddecbd0d5d5d097d7dccd" style="color:var(--teal);text-decoration:none;"><span class="__cf_email__" data-cfemail="ceaaafb8a7aa8eaaafb8a7aaa9bca7a2a2a7e0a0abba">[email&#160;protected]</span></a>
         </div>
       </div>
     </div>
@@ -886,22 +825,6 @@
         If your team needs a risk file built, a regulatory submission supported, a safety program stood up, or an experienced hand for a critical milestone, reach out directly.
         I respond promptly and we can establish fit in a single call.
       </p>
-      <a class="btn primary" href="mailto:david@davidgrilli.net?subject=Contract%20Inquiry%20via%20davidgrilli.net">Send an Inquiry</a>
-      <a class="btn secondary" href="https://www.linkedin.com/in/davidgrilli" target="_blank">View LinkedIn</a>
-    </div>
-  </div>
-
-</div><!-- /wrap -->
-
-<div id="footer">
-  <span>&copy; 2026 David Grilli &nbsp;·&nbsp; St. Paul, MN</span>
-  <span>
-    <a href="mailto:david@davidgrilli.net">david@davidgrilli.net</a>
-    &nbsp;·&nbsp;
-    <a href="https://www.linkedin.com/in/davidgrilli" target="_blank">LinkedIn</a>
-  </span>
-</div>
-
-</body>
+      <a class="btn primary" href="/cdn-cgi/l/email-protection#97f3f6e1fef3d7f3f6e1fef3f0e5fefbfbfeb9f9f2e3a8e4e2f5fdf2f4e3aad4f8f9e3e5f6f4e3b2a5a7def9e6e2fee5eeb2a5a7e1fef6b2a5a7f3f6e1fef3f0e5fefbfbfeb9f9f2e3">Send an Inquiry</a>
+      <a class="btn secondary" href="https://www.linkedin.com/in/davidgrilli" targ</body>
 </html>
-
