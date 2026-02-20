@@ -9,195 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4XY66V3Y3M"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-4XY66V3Y3M');
-
-    // ── SECTION ATTENTION TRACKING ──
-    // Tracks how many seconds a visitor spends with each section in view
-    const sectionTimers = {};
-    const sectionNames = {
-      'about':        'About',
-      'competencies': 'Core Competencies',
-      'engagement':   'Engagement Profile',
-      'experience':   'Experience',
-      'standards':    'Standards & Frameworks',
-      'education':    'Education',
-      'cta':          'Hire Me / CTA'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const id = entry.target.id;
-        if (!id || !sectionNames[id]) return;
-        if (entry.isIntersecting) {
-          // Section entered viewport — start timer
-          sectionTimers[id] = Date.now();
-        } else if (sectionTimers[id]) {
-          // Section left viewport — log elapsed time
-          const seconds = Math.round((Date.now() - sectionTimers[id]) / 1000);
-          delete sectionTimers[id];
-          if (seconds >= 2) { // ignore accidental flashes
-            gtag('event', 'section_attention', {
-              section_name: sectionNames[id],
-              seconds_spent: seconds
-            });
-          }
-        }
-      });
-    }, { threshold: 0.25 }); // fires when 25% of section is visible
-
-    // Also flush any active timers on page unload
-    window.addEventListener('beforeunload', () => {
-      Object.keys(sectionTimers).forEach(id => {
-        const seconds = Math.round((Date.now() - sectionTimers[id]) / 1000);
-        if (seconds >= 2) {
-          gtag('event', 'section_attention', {
-            section_name: sectionNames[id],
-            seconds_spent: seconds
-          });
-        }
-      });
-    });
-
-    // Start observing sections once DOM is ready
-    document.addEventListener('DOMContentLoaded', () => {
-      Object.keys(sectionNames).forEach(id => {
-        const el = document.getElementById(id);
-        if (el) observer.observe(el);
-      });
-
-      // ── CLICK EVENT TRACKING ──
-      const trackClicks = [
-        { selector: 'a[href*="mailto:"]',               label: 'Email Link' },
-        { selector: '.btn.primary',                      label: 'Send Inquiry Button' },
-        { selector: '.btn.secondary',                    label: 'View LinkedIn Button' },
-        { selector: 'a[href*="linkedin.com"]',           label: 'LinkedIn Link' },
-        { selector: 'a[href*="northstarhaptics.com"]',   label: 'North Star Haptics Link' },
-        { selector: '#nav a',                            label: 'Nav Link' },
-      ];
-
-      trackClicks.forEach(({ selector, label }) => {
-        document.querySelectorAll(selector).forEach(el => {
-          el.addEventListener('click', () => {
-            gtag('event', 'click', {
-              event_category: 'engagement',
-              event_label: label,
-              link_url: el.href || ''
-            });
-          });
-        });
-      });
-    });
-  </script>
-  
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-4XY66V3Y3M');
-
-    document.addEventListener('DOMContentLoaded', function () {
-
-      // ── SECTION ATTENTION TRACKING ──
-      // Tracks how many seconds a visitor spends with each section visible
-      const sectionTimers = {};
-      const sectionLabels = {
-        'about':        'About',
-        'competencies': 'Core Competencies',
-        'engagement':   'Engagement Profile',
-        'experience':   'Experience',
-        'standards':    'Standards & Frameworks',
-        'education':    'Education',
-        'cta':          'Contact CTA'
-      };
-
-      const observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          const id = entry.target.id;
-          if (!id || !sectionLabels[id]) return;
-          if (entry.isIntersecting) {
-            sectionTimers[id] = Date.now();
-          } else if (sectionTimers[id]) {
-            const seconds = Math.round((Date.now() - sectionTimers[id]) / 1000);
-            if (seconds >= 2) {
-              gtag('event', 'section_attention', {
-                section_name: sectionLabels[id],
-                seconds_spent: seconds
-              });
-            }
-            delete sectionTimers[id];
-          }
-        });
-      }, { threshold: 0.3 });
-
-      Object.keys(sectionLabels).forEach(function (id) {
-        const el = document.getElementById(id);
-        if (el) observer.observe(el);
-      });
-
-      // Flush timers on page unload for sections still in view
-      window.addEventListener('visibilitychange', function () {
-        if (document.visibilityState === 'hidden') {
-          Object.keys(sectionTimers).forEach(function (id) {
-            const seconds = Math.round((Date.now() - sectionTimers[id]) / 1000);
-            if (seconds >= 2) {
-              gtag('event', 'section_attention', {
-                section_name: sectionLabels[id],
-                seconds_spent: seconds
-              });
-            }
-          });
-        }
-      });
-
-      // ── SCROLL DEPTH TRACKING ──
-      const depthMilestones = [25, 50, 75, 90];
-      const reached = {};
-      window.addEventListener('scroll', function () {
-        const scrollPct = Math.round(
-          (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
-        );
-        depthMilestones.forEach(function (milestone) {
-          if (!reached[milestone] && scrollPct >= milestone) {
-            reached[milestone] = true;
-            gtag('event', 'scroll_depth', { depth_percent: milestone });
-          }
-        });
-      }, { passive: true });
-
-      // ── CTA CLICK TRACKING ──
-      document.querySelectorAll('a[href^="mailto:"]').forEach(function (el) {
-        el.addEventListener('click', function () {
-          gtag('event', 'click_email', {
-            link_text: el.innerText.trim() || 'email link',
-            location:  el.closest('[id]') ? el.closest('[id]').id : 'unknown'
-          });
-        });
-      });
-
-      document.querySelectorAll('a[href*="linkedin.com"]').forEach(function (el) {
-        el.addEventListener('click', function () {
-          gtag('event', 'click_linkedin', {
-            link_text: el.innerText.trim(),
-            location:  el.closest('[id]') ? el.closest('[id]').id : 'unknown'
-          });
-        });
-      });
-
-      // ── NAV CLICK TRACKING ──
-      document.querySelectorAll('#nav a').forEach(function (el) {
-        el.addEventListener('click', function () {
-          gtag('event', 'nav_click', { section: el.innerText.trim() });
-        });
-      });
-
-    });
-  </script>
+  <!-- Google Analytics loader -->
+  <script async data-cfasync="false 
+    src="https://www.googletagmanager.com/gtag/js?id=G-4XY66V3Y3M"></script>
+  <!-- Analytics logic -->
+  <script src="/js/analytics.js"></script>
 </head>
 <body>
 <div id="topbar">
@@ -245,7 +61,7 @@
           Most recently I spent over three years at Abbott leading risk management for electrophysiology product development: RF ablation, pulsed field ablation, and cardiac imaging technologies. Before that, I was a reliability and system safety engineer at Honeywell Aerospace on commercial and defense programs, applying MIL-STD-882E, FTA, FMECA, and safety-critical function thread analysis across multiple platforms — and serving as Control Account Manager for program budgets and schedules.
         </p>
         <p>
-          I work well with teams that need experienced execution without added overhead: someone who can step in, get up to speed quickly, and deliver auditable, defensible work. <strong style="color:var(--navy);text-decoration:underline;">Engagements are typically 20–40 hrs/week, 6–12 months, remote or hybrid.</strong>
+          I work well with teams that need experienced execution without added overhead: someone who can step in, get up to speed quickly, and deliver auditable, defensible work. <strong style="color:var(--navy);text-decoration:underline;">Engagements are typically 20–40 hrs/week, 3–6 months, remote or hybrid.</strong>
         </p>
         <div class="venture-note">
           <strong>Note:</strong> I am a co-founder of <a href="http://www.northstarhaptics.com" target="_blank">North Star Haptics</a>, a hardware venture focused on tactile technology and human-interface design. That work is pre-revenue; my consulting practice operates wholly independently.
@@ -277,7 +93,7 @@
           </div>
           <div class="contact-row">
             <div class="contact-label">Engagement Length</div>
-            <div class="contact-value">6–12 months typical</div>
+            <div class="contact-value">3–6 months typical</div>
           </div>
           <div class="contact-row">
             <div class="contact-label">Hours / Week</div>
@@ -357,8 +173,8 @@
     <div class="terms-grid">
       <div class="term-box">
         <div class="term-label">Duration</div>
-        <div class="term-value">6–12 Months</div>
-        <div class="term-sub">Shorter engagements considered</div>
+        <div class="term-value">3–6 Months</div>
+        <div class="term-sub">Longer engagements considered</div>
       </div>
       <div class="term-box">
         <div class="term-label">Availability</div>
